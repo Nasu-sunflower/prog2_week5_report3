@@ -9,10 +9,10 @@ package jp.ac.uryukyu.ie.e225406;
  * Created by tnal on 2016/11/13.
  */
 public class Enemy {
-    public String name;
-    public int hitPoint;
-    public int attack;
-    public boolean dead;
+    private String name;
+    private int hitPoint;
+    private int attack;
+    private boolean dead;
 
     /**
      * コンストラクタ。名前、最大HP、攻撃力を指定する。
@@ -20,6 +20,19 @@ public class Enemy {
      * @param maximumHP モンスターのHP
      * @param attack モンスターの攻撃力
      */
+
+    //  以下getter
+    public String getname(){return this.name;}
+    public int gethitPoint(){return this.hitPoint;}
+    public int getattack(){return this.attack;}
+    public boolean getdead(){return this.dead;}
+
+    // 以下setter
+    public void setname(String name){this.name = name;}
+    public void sethitPoint(int hitPoint){this.hitPoint = hitPoint;}
+    public void setattack(int attack){this.attack = attack;}
+    public void setdead(boolean dead){this.dead = dead;}
+
     public Enemy (String name, int maximumHP, int attack) {
         this.name = name;
         hitPoint = maximumHP;
@@ -35,8 +48,8 @@ public class Enemy {
      */
     public void attack(Hero hero){
         int damage = (int)(Math.random() * attack);
-        if (hero.dead == false && this.dead == false) {
-            System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.name, damage);
+        if (hero.getdead() == false && this.dead == false) {
+            System.out.printf("%sの攻撃！%sに%dのダメージを与えた！！\n", name, hero.getname(), damage);
             hero.wounded(damage);
         }
     }
@@ -48,7 +61,7 @@ public class Enemy {
      */
     public void wounded(int damage){
         hitPoint -= damage;
-        if( hitPoint < 0 ) {
+        if( hitPoint <= 0 ) {
             dead = true;
             System.out.printf("モンスター%sは倒れた。\n", name);
         }
